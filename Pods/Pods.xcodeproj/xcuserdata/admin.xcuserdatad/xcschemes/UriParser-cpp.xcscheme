@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3423104FE8A06C09E824044A'
+               BlueprintIdentifier = '217249DEF4715F5FE896EF49'
                BlueprintName = 'UriParser-cpp'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libUriParser-cpp.a'>
