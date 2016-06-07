@@ -19,21 +19,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.fileList = @[@"1.png",@"2.png",@"3.png",@"4.png",@"5.png",@"6.png",@"7.png",@"8.png",@"9.png"];
 }
 
-- (void) viewWillAppear:(BOOL)animated{
+- (void) viewWillAppear:(BOOL)animated {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *myPath = [paths objectAtIndex:0];
     // if you save fies in a folder
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // all files in the path
+    self.fileList = [fileManager contentsOfDirectoryAtPath:myPath error:nil];
+    NSLog(@"path - %@",self.fileList);
+    /*
     NSArray *directoryContents = [fileManager contentsOfDirectoryAtPath:myPath error:nil];
     // filter image files
     NSMutableArray *subpredicates = [NSMutableArray array];
     [subpredicates addObject:[NSPredicate predicateWithFormat:@"SELF ENDSWITH '.png'"]];
     NSPredicate *filter = [NSCompoundPredicate orPredicateWithSubpredicates:subpredicates];
     self.fileList = [directoryContents filteredArrayUsingPredicate:filter];
+     */
     [self.collectionView reloadData];
 }
 

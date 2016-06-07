@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.sectionTitles = @[@"Terms of use",@"About us",@"Login",@"Registration"];
+    self.sectionTitles = @[@"Terms of use",@"About us"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,34 +50,6 @@
         NSLog(@"1");
         AboutUSVC *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutUSVC"];
         [self.navigationController showViewController:editViewController sender:self];
-    } else if (indexPath.row == 2) {
-        NSLog(@"2");
-        LoginVC *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-        [self.navigationController showViewController:editViewController sender:self];
-    } else if (indexPath.row == 3) {
-        NSLog(@"3");
-        //
     }
 }
-/*
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    if (indexPath.row == 0) {
-        NSLog(@"0");
-        TermsOfUseVC *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TermsOfUseVC"];
-        [self.navigationController showViewController:editViewController sender:self];
-    } else if (indexPath.row == 1) {
-        NSLog(@"1");
-        AboutUSVC *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutUSVC"];
-        [self.navigationController showViewController:editViewController sender:self];
-    } else if (indexPath.row == 2) {
-        NSLog(@"2");
-        LoginVC *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-        [self.navigationController showViewController:editViewController sender:self];
-    } else if (indexPath.row == 3) {
-        NSLog(@"3");
-        //
-    }
-}
- */
 @end

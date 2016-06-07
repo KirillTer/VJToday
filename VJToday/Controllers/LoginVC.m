@@ -7,12 +7,11 @@
 //
 
 #import "LoginVC.h"
+#import "ProfileVC.h"
 
 @interface LoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *loginText;
 @property (weak, nonatomic) IBOutlet UITextField *passwordText;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIButton *logOutButton;
 @property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 
 @property (nonatomic) NSURLConnection *connection;
@@ -51,12 +50,21 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Logined"];
         NSString *valueToSave = self.loginText.text;
         [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"Login"];
+        NSDictionary *jsonSource = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        [[NSUserDefaults standardUserDefaults] setObject:[jsonSource objectForKey:@"Cookie"] forKey:@"Cookie"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [[self navigationController] popViewControllerAnimated:YES];
         NSLog(@"success! %@", responseObject);
+        jsonSource = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        if([[jsonSource objectForKey:@"SERVER_RESPONSE"] intValue] == 1) {
+            ProfileVC *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileVC"];
+            [self.navigationController showViewController:editViewController sender:self];
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        self.loginLabel.text = @"Incorrect Login or Password";
         NSLog(@"error: %@", error);
     }];
+//    ProfileVC *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileVC"];
+//    [self.navigationController showViewController:editViewController sender:self];
 }
 
 @end

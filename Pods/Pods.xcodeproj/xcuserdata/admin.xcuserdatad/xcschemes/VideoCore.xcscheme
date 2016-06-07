@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FCEF6BA01DA3EFD7B1323B20'
+               BlueprintIdentifier = '506CCEA39E37FB5B4DA01C06'
                BlueprintName = 'VideoCore'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libVideoCore.a'>

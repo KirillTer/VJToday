@@ -14,40 +14,8 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AWSAutoScaling (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSCloudWatch (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSCognito (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSCognitoIdentityProvider (2.4.2):
-    - AWSCore (= 2.4.2)
   - AWSCore (2.4.2)
-  - AWSDynamoDB (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSEC2 (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSElasticLoadBalancing (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSIoT (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSKinesis (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSLambda (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSMachineLearning (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSMobileAnalytics (2.4.2):
-    - AWSCore (= 2.4.2)
   - AWSS3 (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSSES (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSSimpleDB (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSSNS (2.4.2):
-    - AWSCore (= 2.4.2)
-  - AWSSQS (2.4.2):
     - AWSCore (= 2.4.2)
   - boost (1.51.0):
     - boost/graph-includes (= 1.51.0)
@@ -73,45 +41,13 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - AWSAutoScaling
-  - AWSCloudWatch
-  - AWSCognito
-  - AWSCognitoIdentityProvider
-  - AWSDynamoDB
-  - AWSEC2
-  - AWSElasticLoadBalancing
-  - AWSIoT
-  - AWSKinesis
-  - AWSLambda
-  - AWSMachineLearning
-  - AWSMobileAnalytics
   - AWSS3
-  - AWSSES
-  - AWSSimpleDB
-  - AWSSNS
-  - AWSSQS
   - VideoCore
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AWSAutoScaling: 3bbe130105af52b7c65ee79dec046f5552538033
-  AWSCloudWatch: 406de9a661fb2f21ed4b4477d4daf6767ad3ccae
-  AWSCognito: 87cf3dadb17eed732c1c3fe21624fa8f15ef84ec
-  AWSCognitoIdentityProvider: c0eaf378dcd9d36595f188821119aa8dab70431c
   AWSCore: 08cc4318682a518ad73e452900336ba54e823e03
-  AWSDynamoDB: 604d26f6f13275bac9a0fec2c0194bf1593fd2fd
-  AWSEC2: c0816f583aba22833d57787a1cd31f147df352ec
-  AWSElasticLoadBalancing: 6e2a3f1d026a8b9428dec15d7a414f3d768c194d
-  AWSIoT: 6b5aebd81920059590c7e664faae90c5e6ad4977
-  AWSKinesis: 81aefb2fa9b990a5200e3ddac41353016d8281b1
-  AWSLambda: 5afb17589e279a78c462c5dae671a8a5e39d05aa
-  AWSMachineLearning: c1de994c971519472678cde47b2edcdf20580dfb
-  AWSMobileAnalytics: 7e61206330c5dfe0643e749682d93cdbd553c49d
   AWSS3: 21bbd5d41eb175bf2fd371dc8af5339752f7f5b7
-  AWSSES: 9df63d2b69878cdbf43a945bf76951eac52b7119
-  AWSSimpleDB: 584e1051e059396136698150dec58dd5f706abea
-  AWSSNS: bd87a2013d8be90f5f4d3f3d3726d4584714fdfb
-  AWSSQS: 9b4f52f03b9175ae15425a900e14528338ee3155
   boost: 6c5c8d8daef26ac83c1e1c00ad14de62b80161d7
   glm: e22c8d9df10404059b19c2952f9fa44d9a9f3056
   UriParser-cpp: cbbe00080ee432ec4833dca863a7fc83adc9b01a

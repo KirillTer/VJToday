@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8416D4951D06BC9600E01A5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8416D4931D06BC9600E01A5E /* Main.storyboard */; };
 		841F035B1CEDEA1B008C35DC /* ImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F035A1CEDEA1B008C35DC /* ImageVC.m */; };
 		841F035E1CEDEA67008C35DC /* ImageEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F035D1CEDEA67008C35DC /* ImageEditVC.m */; };
 		8436A7F51CD9EB3B000393BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436A7F41CD9EB3B000393BF /* main.m */; };
 		8436A7F81CD9EB3B000393BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436A7F71CD9EB3B000393BF /* AppDelegate.m */; };
-		8436A7FE1CD9EB3B000393BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8436A7FC1CD9EB3B000393BF /* Main.storyboard */; };
 		8436A8001CD9EB3B000393BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8436A7FF1CD9EB3B000393BF /* Assets.xcassets */; };
 		8436A8031CD9EB3B000393BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8436A8011CD9EB3B000393BF /* LaunchScreen.storyboard */; };
 		8436A8131CDA1BBF000393BF /* CameraVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436A8121CDA1BBF000393BF /* CameraVC.m */; };
@@ -22,6 +22,10 @@
 		843DF6101CE2017D00C0323D /* GalaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 843DF60F1CE2017D00C0323D /* GalaryVC.m */; };
 		843DF6131CE20A6200C0323D /* GalaryCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 843DF6121CE20A6200C0323D /* GalaryCVC.m */; };
 		843FF8441CEC722800FCE71E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843FF8431CEC722800FCE71E /* AVFoundation.framework */; };
+		84419CB31D059CAE00456ECB /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84419CB21D059CAE00456ECB /* ProfileVC.m */; };
+		84419CB61D05A09200456ECB /* EditProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84419CB51D05A09200456ECB /* EditProfileVC.m */; };
+		84419CB91D05A0AA00456ECB /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84419CB81D05A0AA00456ECB /* ChangePasswordVC.m */; };
+		845E0CCB1CF8582E00678720 /* libAWSS3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 845E0CCA1CF8582E00678720 /* libAWSS3.a */; };
 		84F609631CEE189000509D70 /* UploadTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F609621CEE189000509D70 /* UploadTVC.m */; };
 		84F609661CEE18F000509D70 /* UploadTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F609651CEE18F000509D70 /* UploadTC.m */; };
 		84F609691CEE3E3000509D70 /* DeleteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F609681CEE3E3000509D70 /* DeleteVC.m */; };
@@ -31,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		027BB6A9C7C7BDF8759D0807 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8416D4941D06BC9600E01A5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		841F03591CEDEA1B008C35DC /* ImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageVC.h; sourceTree = "<group>"; };
 		841F035A1CEDEA1B008C35DC /* ImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageVC.m; sourceTree = "<group>"; };
 		841F035C1CEDEA67008C35DC /* ImageEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEditVC.h; sourceTree = "<group>"; };
@@ -39,7 +44,6 @@
 		8436A7F41CD9EB3B000393BF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8436A7F61CD9EB3B000393BF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8436A7F71CD9EB3B000393BF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8436A7FD1CD9EB3B000393BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8436A7FF1CD9EB3B000393BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8436A8021CD9EB3B000393BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8436A8041CD9EB3B000393BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +62,13 @@
 		843DF6111CE20A6200C0323D /* GalaryCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalaryCVC.h; sourceTree = "<group>"; };
 		843DF6121CE20A6200C0323D /* GalaryCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalaryCVC.m; sourceTree = "<group>"; };
 		843FF8431CEC722800FCE71E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		84419CB11D059CAE00456ECB /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
+		84419CB21D059CAE00456ECB /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVC.m; sourceTree = "<group>"; };
+		84419CB41D05A09200456ECB /* EditProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileVC.h; sourceTree = "<group>"; };
+		84419CB51D05A09200456ECB /* EditProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileVC.m; sourceTree = "<group>"; };
+		84419CB71D05A0AA00456ECB /* ChangePasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
+		84419CB81D05A0AA00456ECB /* ChangePasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
+		845E0CCA1CF8582E00678720 /* libAWSS3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSS3.a; path = "../../Library/Developer/Xcode/DerivedData/VJToday-dassshqzgahtkzeddmvtffmguftm/Build/Products/Debug-iphoneos/libAWSS3.a"; sourceTree = "<group>"; };
 		84F609611CEE189000509D70 /* UploadTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTVC.h; sourceTree = "<group>"; };
 		84F609621CEE189000509D70 /* UploadTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadTVC.m; sourceTree = "<group>"; };
 		84F609641CEE18F000509D70 /* UploadTC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTC.h; sourceTree = "<group>"; };
@@ -75,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845E0CCB1CF8582E00678720 /* libAWSS3.a in Frameworks */,
 				843FF8441CEC722800FCE71E /* AVFoundation.framework in Frameworks */,
 				D9FE15820F020A3863ECFD02 /* libPods.a in Frameworks */,
 			);
@@ -86,6 +98,7 @@
 		3DF39A7E182506A6495CBEF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				845E0CCA1CF8582E00678720 /* libAWSS3.a */,
 				843FF8431CEC722800FCE71E /* AVFoundation.framework */,
 				027BB6A9C7C7BDF8759D0807 /* libPods.a */,
 			);
@@ -125,7 +138,7 @@
 				8436A80D1CDA1B8B000393BF /* Controllers */,
 				8436A7F61CD9EB3B000393BF /* AppDelegate.h */,
 				8436A7F71CD9EB3B000393BF /* AppDelegate.m */,
-				8436A7FC1CD9EB3B000393BF /* Main.storyboard */,
+				8416D4931D06BC9600E01A5E /* Main.storyboard */,
 				8436A7FF1CD9EB3B000393BF /* Assets.xcassets */,
 				8436A8011CD9EB3B000393BF /* LaunchScreen.storyboard */,
 				8436A8041CD9EB3B000393BF /* Info.plist */,
@@ -145,6 +158,10 @@
 		8436A80D1CDA1B8B000393BF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84419CB41D05A09200456ECB /* EditProfileVC.h */,
+				84419CB51D05A09200456ECB /* EditProfileVC.m */,
+				84419CB71D05A0AA00456ECB /* ChangePasswordVC.h */,
+				84419CB81D05A0AA00456ECB /* ChangePasswordVC.m */,
 				84F609671CEE3E3000509D70 /* DeleteVC.h */,
 				84F609681CEE3E3000509D70 /* DeleteVC.m */,
 				84F6096A1CEE3E6100509D70 /* DeleteCVC.h */,
@@ -161,6 +178,8 @@
 				843915731CE9C4E1009C6921 /* ManuTVC.m */,
 				8439157B1CE9D411009C6921 /* LoginVC.h */,
 				8439157C1CE9D411009C6921 /* LoginVC.m */,
+				84419CB11D059CAE00456ECB /* ProfileVC.h */,
+				84419CB21D059CAE00456ECB /* ProfileVC.m */,
 				843915781CE9D35C009C6921 /* AboutUSVC.h */,
 				843915791CE9D35C009C6921 /* AboutUSVC.m */,
 				8436A8111CDA1BBF000393BF /* CameraVC.h */,
@@ -237,7 +256,7 @@
 			files = (
 				8436A8031CD9EB3B000393BF /* LaunchScreen.storyboard in Resources */,
 				8436A8001CD9EB3B000393BF /* Assets.xcassets in Resources */,
-				8436A7FE1CD9EB3B000393BF /* Main.storyboard in Resources */,
+				8416D4951D06BC9600E01A5E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84419CB31D059CAE00456ECB /* ProfileVC.m in Sources */,
 				841F035B1CEDEA1B008C35DC /* ImageVC.m in Sources */,
 				8436A7F81CD9EB3B000393BF /* AppDelegate.m in Sources */,
 				8436A8131CDA1BBF000393BF /* CameraVC.m in Sources */,
@@ -304,7 +324,9 @@
 				843DF6101CE2017D00C0323D /* GalaryVC.m in Sources */,
 				841F035E1CEDEA67008C35DC /* ImageEditVC.m in Sources */,
 				84F609691CEE3E3000509D70 /* DeleteVC.m in Sources */,
+				84419CB91D05A0AA00456ECB /* ChangePasswordVC.m in Sources */,
 				843DF6131CE20A6200C0323D /* GalaryCVC.m in Sources */,
+				84419CB61D05A09200456ECB /* EditProfileVC.m in Sources */,
 				84F609661CEE18F000509D70 /* UploadTC.m in Sources */,
 				84F609631CEE189000509D70 /* UploadTVC.m in Sources */,
 				84F6096C1CEE3E6100509D70 /* DeleteCVC.m in Sources */,
@@ -317,10 +339,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8436A7FC1CD9EB3B000393BF /* Main.storyboard */ = {
+		8416D4931D06BC9600E01A5E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8436A7FD1CD9EB3B000393BF /* Base */,
+				8416D4941D06BC9600E01A5E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

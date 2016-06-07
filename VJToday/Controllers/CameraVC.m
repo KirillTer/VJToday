@@ -12,6 +12,7 @@
 
 @interface CameraVC ()
 @property (nonatomic) BOOL isStreaming;
+@property (nonatomic) BOOL isVideo;
 @property (nonatomic) BOOL isTabBarHidden;
 @property (strong, nonatomic) VCSimpleSession* liveSession;
 @property (strong, nonatomic) AVCaptureStillImageOutput *stillImageOutput;
@@ -60,7 +61,7 @@ int hours, minutes, seconds, secondsLeft;
         self.logoImage.hidden = NO;
     }
     
-    self.liveSession = [[VCSimpleSession alloc] initWithVideoSize:CGSizeMake(720, 1280) frameRate:24 bitrate:1000000 useInterfaceOrientation:NO];
+    self.liveSession = [[VCSimpleSession alloc] initWithVideoSize:CGSizeMake(1280, 720) frameRate:24 bitrate:1700000 useInterfaceOrientation:NO];
     self.liveSession.useAdaptiveBitrate=YES; //adapt bit  rate - best for mobile usage
     
     [self.liveView addSubview:_liveSession.previewView];
@@ -69,6 +70,8 @@ int hours, minutes, seconds, secondsLeft;
     [self.liveView addSubview:self.notificationLabel];
     [self.liveView addSubview:self.logoImage];
     self.liveSession.previewView.frame = self.liveView.bounds;
+    
+    self.session = [[AVCaptureSession alloc] init];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -82,7 +85,6 @@ int hours, minutes, seconds, secondsLeft;
 }
 
 - (IBAction)onPhoto:(id)sender {
-    self.session = [[AVCaptureSession alloc] init];
     [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
     AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     NSError *error;
@@ -119,22 +121,102 @@ int hours, minutes, seconds, secondsLeft;
             NSDate *now = [NSDate date];
             NSString *nsstr = [format stringFromDate:now];
             NSString *prefixString = @"Documents/photo";
-            NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@.png", prefixString, nsstr];
+            NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@.jpeg", prefixString, nsstr];
             
             NSString  *jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:uniqueFileName];
             [UIImageJPEGRepresentation(image, 1.0) writeToFile:jpgPath atomically:YES];
-            
+            NSLog(@"image path - %@",jpgPath);
 //            NSError *error = nil;
 //            NSString *stringPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
 //            NSArray *fileList = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath: stringPath  error: &error];
 //            self.takenPhoto.image = [UIImage imageNamed:[fileList objectAtIndex:0]];
 //            NSLog(@"%@",[fileList objectAtIndex:0]);
-            
         }
     }];
     [self.session stopRunning];
 }
 
+//Video recording
+- (IBAction)onVideo:(id)sender {
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    switch (orientation) {
+        case UIDeviceOrientationLandscapeLeft:
+        case UIDeviceOrientationLandscapeRight:
+            NSLog(@"Video button pressed");
+            if (!self.isVideo) {
+                [self startVideo];
+            } else {
+                [self finishVideo];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void) startVideo {
+    self.session.sessionPreset = AVCaptureSessionPresetMedium;
+    
+    CALayer *viewLayer = self.liveView.layer;
+    NSLog(@"viewLayer = %@", viewLayer);
+    
+    AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+    captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    captureVideoPreviewLayer.frame = self.liveView.bounds;
+    
+    //[self.liveView.layer addSublayer:captureVideoPreviewLayer];
+    
+    AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    NSError *error = nil;
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:&error];
+    if (!input) {
+        // Handle the error appropriately.
+        NSLog(@"ERROR: trying to open camera: %@", error);
+    }
+    
+    AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+    AVCaptureDeviceInput * audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+    [self.session addInput:audioInput];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoryPath = [paths objectAtIndex:0];
+    
+    AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+    
+    NSString *outputpathofmovie = [[documentsDirectoryPath stringByAppendingPathComponent:@"video"] stringByAppendingString:@".mp4"];
+    NSURL *outputURL = [[NSURL alloc] initFileURLWithPath:outputpathofmovie];
+    NSLog(@"path - %@", outputURL);
+    
+    [self.session addInput:input];
+    [self.session addOutput:movieFileOutput];
+    [self.session commitConfiguration];
+    [self.session startRunning];
+    
+    UIImage *btnImage = [UIImage imageNamed:@"Stop"];
+    [self.videoButton setImage:btnImage forState:UIControlStateNormal];
+    self.isVideo = YES;
+    self.photoButton.hidden = YES;
+    self.streamButton.hidden = YES;
+    self.counterView.hidden = NO;
+    //self.counterImage.hidden = NO;
+    [self countdownTimer];
+    NSLog(@"Video Start");
+}
+
+- (void) finishVideo {
+    [self.session stopRunning];
+    UIImage *btnImage = [UIImage imageNamed:@"Video"];
+    [self.videoButton setImage:btnImage forState:UIControlStateNormal];
+    self.isVideo = NO;
+    self.photoButton.hidden = NO;
+    self.streamButton.hidden = NO;
+    self.counterView.hidden = YES;
+    //self.counterImage.hidden = YES;
+    NSLog(@"Video Stop");
+}
+
+//Streaming
 - (IBAction)onStream:(id)sender {
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
     switch (orientation) {
