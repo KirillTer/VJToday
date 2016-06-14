@@ -14,6 +14,8 @@
 @property (nonatomic) BOOL isStreaming;
 @property (nonatomic) BOOL isVideo;
 @property (nonatomic) BOOL isTabBarHidden;
+@property (strong, nonatomic) NSString *descriptionFilePath;
+@property (strong, nonatomic) NSMutableDictionary *descriptionDict;
 @property (strong, nonatomic) VCSimpleSession* liveSession;
 @property (strong, nonatomic) AVCaptureStillImageOutput *stillImageOutput;
 @property (strong, nonatomic) AVCaptureSession* session;
@@ -41,12 +43,16 @@ int hours, minutes, seconds, secondsLeft;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isStreaming = NO;
+    self.descriptionDict = [[NSMutableDictionary alloc] init];
     [UIApplication sharedApplication].idleTimerDisabled = YES; //Disable sleep mode
     [[UITabBar appearance] setBarTintColor:[UIColor blackColor]]; //Tab Bar panel
     [[UITabBar appearance] setTintColor:[UIColor redColor]];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLunch"]) {
         NSLog(@"First Launch");
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
         self.portraiTutoriaLabel.hidden = NO;
         self.notificationLabel.hidden = YES;
         self.counterView.hidden = YES;
@@ -123,9 +129,18 @@ int hours, minutes, seconds, secondsLeft;
             NSString *prefixString = @"Documents/photo";
             NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@.jpeg", prefixString, nsstr];
             
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"description",@"",@"tags",nil];
+            
+            //self.descriptionDict = [NSMutableDictionary dictionaryWithContentsOfFile:self.descriptionFilePath];
+            [self.descriptionDict setObject:dict forKey:nsstr];
+            [self.descriptionDict writeToFile:self.descriptionFilePath atomically:YES];
+            NSLog(@"dict - %@",dict);
+            NSLog(@"uniqueFileName - %@",nsstr);
+            NSLog(@"Camera file - %@",self.descriptionDict);
+            
             NSString  *jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:uniqueFileName];
             [UIImageJPEGRepresentation(image, 1.0) writeToFile:jpgPath atomically:YES];
-            NSLog(@"image path - %@",jpgPath);
+            //NSLog(@"image path - %@",jpgPath);
 //            NSError *error = nil;
 //            NSString *stringPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
 //            NSArray *fileList = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath: stringPath  error: &error];

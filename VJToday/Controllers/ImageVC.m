@@ -7,6 +7,7 @@
 //
 
 #import "ImageVC.h"
+#import "ImageEditVC.h"
 
 @interface ImageVC ()
 @property (weak, nonatomic) IBOutlet UIImageView *photo;
@@ -21,6 +22,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (IBAction)editAction:(id)sender {
+    ImageEditVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ImageEditVC"];
+    vc.fileName = self.fileName;
+    NSLog(@"imageName - %@",self.fileName);
+    [self.navigationController showViewController:vc sender:self];
 }
 
 - (IBAction)galary:(id)sender {

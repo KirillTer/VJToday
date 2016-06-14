@@ -28,7 +28,7 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // all files in the path
     self.fileList = [fileManager contentsOfDirectoryAtPath:myPath error:nil];
-    NSLog(@"path - %@",self.fileList);
+    //NSLog(@"path - %@",self.fileList);
     /*
     NSArray *directoryContents = [fileManager contentsOfDirectoryAtPath:myPath error:nil];
     // filter image files
@@ -74,6 +74,7 @@
     NSString *myPath = [paths objectAtIndex:0];
     NSString *imagePath = [myPath stringByAppendingPathComponent:[self.fileList objectAtIndex:indexPath.row]];
     vc.photoImage = [UIImage imageWithContentsOfFile:imagePath];
+    vc.fileName = self.fileList[indexPath.row];
     //NSLog(@"%@",[UIImage imageWithContentsOfFile:imagePath]);
 }
 

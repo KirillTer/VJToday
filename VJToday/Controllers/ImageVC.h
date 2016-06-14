@@ -10,4 +10,5 @@
 
 @interface ImageVC : UIViewController
 @property (strong, nonatomic) UIImage *photoImage;
+@property (strong, nonatomic) NSString *fileName;
 @end

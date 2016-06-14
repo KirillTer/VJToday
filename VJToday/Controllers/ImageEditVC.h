@@ -11,5 +11,5 @@
 @interface ImageEditVC : UIViewController
 @property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet UITextField *tagText;
-
+@property (strong, nonatomic) NSString *fileName;
 @end
