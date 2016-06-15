@@ -48,11 +48,17 @@ int hours, minutes, seconds, secondsLeft;
     [[UITabBar appearance] setBarTintColor:[UIColor blackColor]]; //Tab Bar panel
     [[UITabBar appearance] setTintColor:[UIColor redColor]];
     
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLunch"]) {
         NSLog(@"First Launch");
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
+//        [[NSUserDefaults standardUserDefaults] setObject:self.descriptionFilePath forKey:@"PathFile"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         self.portraiTutoriaLabel.hidden = NO;
         self.notificationLabel.hidden = YES;
         self.counterView.hidden = YES;
@@ -66,7 +72,7 @@ int hours, minutes, seconds, secondsLeft;
         self.notificationLabel.hidden = NO;
         self.logoImage.hidden = NO;
     }
-    
+    //self.descriptionFilePath = [[NSUserDefaults standardUserDefaults] stringForKey:@"PathFile"];
     self.liveSession = [[VCSimpleSession alloc] initWithVideoSize:CGSizeMake(1280, 720) frameRate:24 bitrate:1700000 useInterfaceOrientation:NO];
     self.liveSession.useAdaptiveBitrate=YES; //adapt bit  rate - best for mobile usage
     
@@ -76,21 +82,14 @@ int hours, minutes, seconds, secondsLeft;
     [self.liveView addSubview:self.notificationLabel];
     [self.liveView addSubview:self.logoImage];
     self.liveSession.previewView.frame = self.liveView.bounds;
-    
-    self.session = [[AVCaptureSession alloc] init];
-}
-
--(void)viewDidAppear:(BOOL)animated {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLunch"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)onPhoto:(id)sender {
+    self.session = [[AVCaptureSession alloc] init];
     [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
     AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     NSError *error;
@@ -116,7 +115,15 @@ int hours, minutes, seconds, secondsLeft;
             break;
         }
     }
-    
+//    self.descriptionDict = [[NSMutableDictionary alloc] init];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLunch"]) {
+        NSData *myData=[NSData dataWithContentsOfFile:self.descriptionFilePath];
+        NSMutableDictionary *dict = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:myData];
+        self.descriptionDict = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:myData];
+        NSLog(@"File before - %@",dict);
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLunch"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
         if (imageDataSampleBuffer) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
@@ -126,26 +133,22 @@ int hours, minutes, seconds, secondsLeft;
             [format setDateFormat:@"HH:mm:ss_dd:MMM:yyyy"];
             NSDate *now = [NSDate date];
             NSString *nsstr = [format stringFromDate:now];
-            NSString *prefixString = @"Documents/photo";
+            NSString *prefixString = @"photo";
             NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@.jpeg", prefixString, nsstr];
-            
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"description",@"",@"tags",nil];
-            
-            //self.descriptionDict = [NSMutableDictionary dictionaryWithContentsOfFile:self.descriptionFilePath];
-            [self.descriptionDict setObject:dict forKey:nsstr];
-            [self.descriptionDict writeToFile:self.descriptionFilePath atomically:YES];
-            NSLog(@"dict - %@",dict);
-            NSLog(@"uniqueFileName - %@",nsstr);
-            NSLog(@"Camera file - %@",self.descriptionDict);
-            
-            NSString  *jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:uniqueFileName];
+            NSString  *jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%@", @"Documents/", uniqueFileName]];
             [UIImageJPEGRepresentation(image, 1.0) writeToFile:jpgPath atomically:YES];
-            //NSLog(@"image path - %@",jpgPath);
-//            NSError *error = nil;
-//            NSString *stringPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
-//            NSArray *fileList = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath: stringPath  error: &error];
-//            self.takenPhoto.image = [UIImage imageNamed:[fileList objectAtIndex:0]];
-//            NSLog(@"%@",[fileList objectAtIndex:0]);
+            
+            NSMutableDictionary *descDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"description",@"",@"tags",nil];
+            
+            [self.descriptionDict setObject:descDict forKey:uniqueFileName];
+            NSData *serializedData= [NSKeyedArchiver archivedDataWithRootObject:self.descriptionDict];
+            [serializedData writeToFile:self.descriptionFilePath atomically:YES];
+            NSData *myData=[NSData dataWithContentsOfFile:self.descriptionFilePath];
+            NSMutableDictionary* myDict = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:myData];
+            //NSLog(@"self.descriptionDict - %@",self.descriptionDict);
+            NSLog(@"descriptionFilePath - %@",self.descriptionFilePath);
+            NSLog(@"uniqueFileName - %@",uniqueFileName);
+            NSLog(@"File After - %@",myDict);
         }
     }];
     [self.session stopRunning];
@@ -170,6 +173,7 @@ int hours, minutes, seconds, secondsLeft;
 }
 
 - (void) startVideo {
+    self.session = [[AVCaptureSession alloc] init];
     self.session.sessionPreset = AVCaptureSessionPresetMedium;
     
     CALayer *viewLayer = self.liveView.layer;

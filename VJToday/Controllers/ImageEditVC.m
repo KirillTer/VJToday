@@ -23,14 +23,15 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
-    self.descriptionDict = [NSMutableDictionary dictionaryWithContentsOfFile:self.descriptionFilePath];
-    
-    NSMutableDictionary *dict = [self.descriptionDict objectForKey:self.fileName];
-    self.descriptionText.text = [dict objectForKey:@"description"];
-    self.tagText.text = [dict objectForKey:@"tags"];
+    NSData *myData=[NSData dataWithContentsOfFile:self.descriptionFilePath];
+    self.descriptionDict = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:myData];
+
+    NSMutableDictionary *imgDict = [self.descriptionDict objectForKey:self.fileName];
+    self.descriptionText.text = [imgDict objectForKey:@"description"];
+    self.tagText.text = [imgDict objectForKey:@"tags"];
     NSLog(@"name - %@",self.fileName);
-    NSLog(@"file path - %@",self.descriptionFilePath);
-    NSLog(@"file - %@",self.descriptionDict);
+//    NSLog(@"file path - %@",self.descriptionFilePath);
+//    NSLog(@"file - %@",self.descriptionDict);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,11 +41,15 @@
 - (IBAction)saveAction:(id)sender {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.descriptionText.text,@"description",self.tagText.text,@"tags",nil];
     [self.descriptionDict setObject:dict forKey:self.fileName];
-    [self.descriptionDict writeToFile:self.descriptionFilePath atomically:YES];
+    NSData *serializedData= [NSKeyedArchiver archivedDataWithRootObject:self.descriptionDict];
+    [serializedData writeToFile:self.descriptionFilePath atomically:YES];
+
+    NSData *myData=[NSData dataWithContentsOfFile:self.descriptionFilePath];
+    NSMutableDictionary* myDict= (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:myData];
+    NSLog(@"self.descriptionDict - %@",self.descriptionDict);
+    NSLog(@"descriptionFilePath - %@",self.descriptionFilePath);
     NSLog(@"name - %@",self.fileName);
-    NSLog(@"dict - %@",dict);
-    NSLog(@"file path - %@",self.descriptionFilePath);
-    NSLog(@"file - %@",self.descriptionDict);
+    NSLog(@"File - %@",myDict);
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
