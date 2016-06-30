@@ -1,4 +1,4 @@
-//
+
 //  CameraVC.m
 //  VJToday
 //
@@ -53,11 +53,11 @@ int hours, minutes, seconds, secondsLeft;
     self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLunch"]) {
         NSLog(@"First Launch");
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *documentsDirectory = [paths objectAtIndex:0];
-//        self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
-//        [[NSUserDefaults standardUserDefaults] setObject:self.descriptionFilePath forKey:@"PathFile"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
+        //        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        //        NSString *documentsDirectory = [paths objectAtIndex:0];
+        //        self.descriptionFilePath = [documentsDirectory stringByAppendingPathComponent:@"description.xml"];
+        //        [[NSUserDefaults standardUserDefaults] setObject:self.descriptionFilePath forKey:@"PathFile"];
+        //        [[NSUserDefaults standardUserDefaults] synchronize];
         
         self.portraiTutoriaLabel.hidden = NO;
         self.notificationLabel.hidden = YES;
@@ -92,6 +92,7 @@ int hours, minutes, seconds, secondsLeft;
     self.session = [[AVCaptureSession alloc] init];
     [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
     AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
     NSError *error;
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:&error];
     if ([self.session canAddInput:deviceInput]) {
@@ -115,7 +116,7 @@ int hours, minutes, seconds, secondsLeft;
             break;
         }
     }
-//    self.descriptionDict = [[NSMutableDictionary alloc] init];
+    //    self.descriptionDict = [[NSMutableDictionary alloc] init];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLunch"]) {
         NSData *myData=[NSData dataWithContentsOfFile:self.descriptionFilePath];
         NSMutableDictionary *dict = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:myData];
@@ -128,7 +129,7 @@ int hours, minutes, seconds, secondsLeft;
         if (imageDataSampleBuffer) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
             UIImage *image = [UIImage imageWithData:imageData];
-//            NSLog(@"photo make! - %@",image);
+            //            NSLog(@"photo make! - %@",image);
             NSDateFormatter *format = [[NSDateFormatter alloc] init];
             [format setDateFormat:@"HH:mm:ss_dd:MMM:yyyy"];
             NSDate *now = [NSDate date];
@@ -205,12 +206,15 @@ int hours, minutes, seconds, secondsLeft;
     
     NSString *outputpathofmovie = [[documentsDirectoryPath stringByAppendingPathComponent:@"video"] stringByAppendingString:@".mp4"];
     NSURL *outputURL = [[NSURL alloc] initFileURLWithPath:outputpathofmovie];
+    
     NSLog(@"path - %@", outputURL);
     
     [self.session addInput:input];
     [self.session addOutput:movieFileOutput];
     [self.session commitConfiguration];
     [self.session startRunning];
+    
+    [movieFileOutput startRecordingToOutputFileURL:outputURL recordingDelegate:self];
     
     UIImage *btnImage = [UIImage imageNamed:@"Stop"];
     [self.videoButton setImage:btnImage forState:UIControlStateNormal];

@@ -30,12 +30,12 @@
     self.fileList = [fileManager contentsOfDirectoryAtPath:myPath error:nil];
     //NSLog(@"path - %@",self.fileList);
 
-    NSArray *directoryContents = [fileManager contentsOfDirectoryAtPath:myPath error:nil];
-    // filter image files
-    NSMutableArray *subpredicates = [NSMutableArray array];
-    [subpredicates addObject:[NSPredicate predicateWithFormat:@"SELF ENDSWITH '.jpeg'"]];
-    NSPredicate *filter = [NSCompoundPredicate orPredicateWithSubpredicates:subpredicates];
-    self.fileList = [directoryContents filteredArrayUsingPredicate:filter];
+//    NSArray *directoryContents = [fileManager contentsOfDirectoryAtPath:myPath error:nil];
+//    // filter image files
+//    NSMutableArray *subpredicates = [NSMutableArray array];
+//    [subpredicates addObject:[NSPredicate predicateWithFormat:@"SELF ENDSWITH '.jpeg'"]];
+//    NSPredicate *filter = [NSCompoundPredicate orPredicateWithSubpredicates:subpredicates];
+//    self.fileList = [directoryContents filteredArrayUsingPredicate:filter];
 
     [self.collectionView reloadData];
 }
